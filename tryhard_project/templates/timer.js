@@ -17,8 +17,10 @@ function startTimer() {
 function switchText() {
     if (startStopButton.innerHTML === "Start Timer") {
         startStopButton.innerHTML = "Stop Timer";
+        isStarted = false;
     } else {
         startStopButton.innerHTML = "Start Timer";
+        isStarted =  true;
     }
 }
 function  handleButtonPress() {
