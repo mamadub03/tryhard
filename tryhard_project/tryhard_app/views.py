@@ -3,4 +3,16 @@ from django.shortcuts import render
 # Create your views here.
 
 def index(request):
-    return render(request,'try_hard/index.html')
+    return render(request,'index.html')
+
+def leaderboard(request):
+    return render(request,'leaderboard.html')
+
+def login(request):
+    return render(request,'login.html')
+
+def signup(request):
+    return render(request,'signup.html')
+
+def timer(request):
+    return render(request,'timer.html')
