@@ -1,11 +1,13 @@
 let timerInterval;
 let totalSeconds = 0;
-let isStarted = false;//false is stopped, true is started
+let lastTimerTotal;
+let isStopped = true;
 
 const timerDisplay = document.getElementById('timer-display');
 const startStopButton = document.getElementById('start-stop-button');
 
 function startTimer() {
+    timerDisplay.textContent = formatTime(totalSeconds);    
     timerInterval = setInterval(() => {//start timer
         totalSeconds++;
         timerDisplay.textContent = formatTime(totalSeconds);
@@ -15,28 +17,26 @@ function startTimer() {
 
 
 function switchText() {//TODO combine switchText and handleButtonPress
-    if (startStopButton.innerHTML === "Start Timer") {
-        startStopButton.innerHTML = "Stop Timer";
-        isStarted = false;
+    if (startStopButton.innerHTML === "Stop Timer") {
+        startStopButton.innerHTML = "Create New Timer";
+        isStopped = false;
     } else {
-        startStopButton.innerHTML = "Start Timer";
-        isStarted =  true;
+        startStopButton.innerHTML = "Stop Timer";
+        isStopped =  true;
     }
 }
 function  handleButtonPress() {
-    if(isStarted) {
-        stopTimer();
-    } else {
+    if(isStopped) {
         startTimer();
+    } else {
+        stopTimer();
     }
 }
 
 function stopTimer() {
-   
-    
+    lastTimerTotal = totalSeconds;
     clearInterval(timerInterval);
     totalSeconds = 0;
-    timerDisplay.textContent = formatTime(totalSeconds);
     document.removeEventListener('visibilitychange', handleVisibilityChange);//removes listener once stopped
 }
 function formatTime(seconds) {
