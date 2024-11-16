@@ -14,7 +14,7 @@ function startTimer() {
 }
 
 
-function switchText() {
+function switchText() {//TODO combine switchText and handleButtonPress
     if (startStopButton.innerHTML === "Start Timer") {
         startStopButton.innerHTML = "Stop Timer";
         isStarted = false;
@@ -32,10 +32,11 @@ function  handleButtonPress() {
 }
 
 function stopTimer() {
-    startButton.disabled = false;
-    stopButton.disabled = true;
-
+   
+    
     clearInterval(timerInterval);
+    totalSeconds = 0;
+    timerDisplay.textContent = formatTime(totalSeconds);
     document.removeEventListener('visibilitychange', handleVisibilityChange);//removes listener once stopped
 }
 function formatTime(seconds) {
