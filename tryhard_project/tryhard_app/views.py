@@ -107,7 +107,7 @@ def save_session(request):
 
 def leaderboard(request):
     time_list = CustomUser.objects.order_by('-total_time')
-    return render(request, 'leaderboard.html',{'users':time_list})
+    return render(request, '/templates/lb.html',{'users':time_list})
 
 
 def timer(request):
