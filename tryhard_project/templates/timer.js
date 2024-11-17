@@ -23,6 +23,7 @@ function stopTimer() {
     clearInterval(timerInterval);
     totalSeconds = 0;
     document.removeEventListener('visibilitychange', handleVisibilityChange);//removes listener once stopped
+    
 }
 
 function  handleButtonPress() {

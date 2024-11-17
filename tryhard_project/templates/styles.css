@@ -36,3 +36,20 @@ button {
     margin: 0 10px;
     cursor: pointer;
 }
+#prompt-section {
+    margin-top: 20px;
+}
+
+#prompt-section h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+#prompt-section button {
+    font-size: 18px;
+    padding: 10px 20px;
+}
+
+#prompt-section p {
+    color: red;
+}
