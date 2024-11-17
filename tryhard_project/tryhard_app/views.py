@@ -16,11 +16,11 @@ from django.template.loader import get_template
 def index(request):
     return render(request,'index.html')
 
-def lb(request):
-    time_list = CustomUser.objects.order_by('-total_time')
-    print(get_template('lb.html'))
-    return render(request, 'lb.html')
 
+
+def lb(request):
+    users = CustomUser.objects.order_by('-total_time')
+    return render(request, 'lb.html', {'users': users})
 
 def login(request):
     if request.method == 'POST':
