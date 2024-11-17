@@ -112,4 +112,3 @@ def leaderboard(request):
 
 def timer(request):
     return render(request,'timer.html')
-
