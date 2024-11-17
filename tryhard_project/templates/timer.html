@@ -1,11 +1,17 @@
+
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TryHard - Study Timer</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="timer.js" defer></script>
+    
+    <!-- <link rel="stylesheet" href="templates/styles.css">
+    <script src="templates/timer.js" defer></script> -->
+    <link rel="stylesheet" href="{% static '/css/styles.css' %}">
+
+    
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -98,6 +104,14 @@
         <nav>
             <a href="/">Home</a>
             <a href="/leaderboard/">Leaderboard</a>
+            {% if username %}
+                <span>Welcome, {{ username }}!</span>
+                <a href="/logout/">Logout</a>
+            {% else %}
+                not found!
+                <a href="/login/">Login</a>
+                <a href="/signup/">Sign Up</a>
+            {% endif %}
         </nav>
     </header>
     <main>
@@ -114,4 +128,6 @@
         <p>&copy; TryHard Team: Mamadu, Ramin, Aamir, Zinedine.</p>
     </footer>
 </body>
+        <script src="{% static '/js/timer.js' %}"></script>
+
 </html>
