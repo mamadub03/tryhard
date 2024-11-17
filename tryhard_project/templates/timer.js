@@ -7,6 +7,8 @@ const timerDisplay = document.getElementById('timer-display');
 const startStopButton = document.getElementById('start-stop-button');
 
 function startTimer() {
+    startStopButton.innerHTML = "Create New Timer";
+    isStopped = false;
     timerDisplay.textContent = formatTime(totalSeconds);    
     timerInterval = setInterval(() => {//start timer
         totalSeconds++;
@@ -14,17 +16,15 @@ function startTimer() {
     }, 1000);
     document.addEventListener('visibilitychange', handleUserTabout);//event listener for user tabbing out
 }
-
-
-function switchText() {//TODO combine switchText and handleButtonPress
-    if (startStopButton.innerHTML === "Stop Timer") {
-        startStopButton.innerHTML = "Create New Timer";
-        isStopped = false;
-    } else {
-        startStopButton.innerHTML = "Stop Timer";
-        isStopped =  true;
-    }
+function stopTimer() {
+    startStopButton.innerHTML = "Stop Timer";
+    isStopped =  true;
+    lastTimerTotal = totalSeconds;
+    clearInterval(timerInterval);
+    totalSeconds = 0;
+    document.removeEventListener('visibilitychange', handleVisibilityChange);//removes listener once stopped
 }
+
 function  handleButtonPress() {
     if(isStopped) {
         startTimer();
@@ -33,12 +33,7 @@ function  handleButtonPress() {
     }
 }
 
-function stopTimer() {
-    lastTimerTotal = totalSeconds;
-    clearInterval(timerInterval);
-    totalSeconds = 0;
-    document.removeEventListener('visibilitychange', handleVisibilityChange);//removes listener once stopped
-}
+
 function formatTime(seconds) {
     const hrs = String(Math.floor(seconds / 3600)).padStart(2, '0');
     const mins = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
