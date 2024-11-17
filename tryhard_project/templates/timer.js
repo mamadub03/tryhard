@@ -26,7 +26,7 @@ function startTimer() {
     checkInInterval = setInterval(() => {
         pauseTimer();
         showPrompt();
-    }, 1800000);//30 minutes
+    }, 1800000);//30 minutes (1800000)
 
     
     document.addEventListener('visibilitychange', handleUserTabout);//tab out event listener
@@ -110,7 +110,7 @@ function showPrompt() {
     promptTimeout = setTimeout(() => {//timeout if user is unresponsive
         stopTimer();
         alert('Timer has been stopped due to inactivity.');
-    }, 300000); //5 minutes
+    }, 300000); //5 minutes (300000)
 }
 
 function hidePrompt() {
