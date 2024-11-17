@@ -37,8 +37,27 @@ button {
     margin: 0 10px;
     cursor: pointer;
 }
+<<<<<<< HEAD
 
 button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
+=======
+#prompt-section {
+    margin-top: 20px;
+}
+
+#prompt-section h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+#prompt-section button {
+    font-size: 18px;
+    padding: 10px 20px;
+}
+
+#prompt-section p {
+    color: red;
+>>>>>>> 895de1cef8a683642849b346a68e3090469583b1
 }
