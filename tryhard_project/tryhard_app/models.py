@@ -11,9 +11,28 @@ class CustomUser(models.Model):
 
     
     def save(self, *args, **kwargs):
-            if self.password and not self.password.startswith('$'):  # If password is not hashed
-                self.password = make_password(self.password)  # Hash the password
-            super().save(*args, **kwargs)
+
+        # Check if the user already exists (i.e., has a primary key)
+
+        if self.pk:
+
+            # Fetch the original password from the database
+
+            original = CustomUser.objects.get(pk=self.pk)
+
+            if self.password != original.password:
+
+                # Password has changed; hash it
+
+                self.password = make_password(self.password)
+
+        else:
+
+            # New user; hash the password
+
+            self.password = make_password(self.password)
+
+        super().save(*args, **kwargs)
             
     def __str__(self):
         return self.username

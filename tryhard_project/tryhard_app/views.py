@@ -6,6 +6,7 @@ import json
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from .models import CustomUser
+from django.template.loader import get_template
 # Create your views here.
 
 
@@ -14,6 +15,12 @@ from .models import CustomUser
 
 def index(request):
     return render(request,'index.html')
+
+def lb(request):
+    time_list = CustomUser.objects.order_by('-total_time')
+    print(get_template('lb.html'))
+    return render(request, 'lb.html')
+
 
 def login(request):
     if request.method == 'POST':
@@ -105,10 +112,8 @@ def save_session(request):
         return JsonResponse({'status': 'error', 'message': 'Only POST method is allowed'}, status=405)
     
 
-def leaderboard(request):
-    time_list = CustomUser.objects.order_by('-total_time')
-    return render(request, '/templates/lb.html',{'users':time_list})
 
+    
 
 def timer(request):
     return render(request,'timer.html')
