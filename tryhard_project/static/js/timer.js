@@ -42,7 +42,7 @@ function stopTimer() {
     clearTimeout(promptTimeout);
     document.removeEventListener('visibilitychange', handleUserTabout);
 
-    fetch('/save_session', {
+    fetch('/save_session/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

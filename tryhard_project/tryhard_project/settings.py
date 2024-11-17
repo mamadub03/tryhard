@@ -30,6 +30,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+APPEND_SLASH = False
 
 # Application definition
 
@@ -116,6 +117,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+# AUTH_USER_MODEL = 'tryhard_app.CustomUser'
 
 
 # Static files (CSS, JavaScript, Images)

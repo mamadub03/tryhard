@@ -2,8 +2,15 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth import authenticate, login as auth_login
+import json
+from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 from .models import CustomUser
 # Create your views here.
+
+
+# @login_required
+
 
 def index(request):
     return render(request,'index.html')
@@ -60,6 +67,23 @@ def signup(request):
         return redirect('login')  # Redirect to login page after sign-up
 
     return render(request, 'signup.html')
+
+def save_session(request):
+    if request.method == 'POST':
+        print(request.body)
+        try:
+            data = json.loads(request.body)
+            username = request.session.get('username')
+            duration = data.get('duration', 0)
+            # Here you would save the duration to the database, if applicable
+            print(duration)
+            print(username)
+            return JsonResponse({'status': 'success', 'duration': duration})
+        except json.JSONDecodeError:
+            return JsonResponse({'status': 'error', 'message': 'Invalid JSON'}, status=400)
+    else:
+        return JsonResponse({'status': 'error', 'message': 'Only POST method is allowed'}, status=405)
+    
 
 def timer(request):
     return render(request,'timer.html')
