@@ -2,16 +2,102 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TryHard - Study Timer</title>
     <link rel="stylesheet" href="styles.css">
     <script src="timer.js" defer></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #fff;
+            text-align: center;
+        }
+
+        header {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            border-bottom: 2px solid #2a5298;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        nav {
+            margin-top: 10px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+            padding: 20px;
+        }
+
+        #timer-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        #timer-display {
+            font-size: 5rem;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        #start-stop-button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2a5298;
+            background: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #start-stop-button:hover {
+            background-color: #f0f0f0;
+        }
+
+        footer {
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
     <header>
         <h1>TryHard Study Timer</h1>
         <nav>
-            <a href="index/">Home</a> |
-            <a href="leaderboard/">Leaderboard</a> |
+            <a href="index/">Home</a>
+            <a href="leaderboard/">Leaderboard</a>
         </nav>
     </header>
     <main>
@@ -21,7 +107,7 @@
         </section>
     </main>
     <footer>
-        <p>&copy; TryHard team: Mamadu, Ramin, Aamir, Zinedine.</p>
+        <p>&copy; TryHard Team: Mamadu, Ramin, Aamir, Zinedine.</p>
     </footer>
 </body>
 </html>
