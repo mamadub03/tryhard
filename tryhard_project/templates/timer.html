@@ -1,51 +1,56 @@
-
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TryHard</title>
-    
-    <!-- <link rel="stylesheet" href="templates/styles.css">
-    <script src="templates/timer.js" defer></script> -->
     <link rel="stylesheet" href="{% static '/css/styles.css' %}">
 
-    
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            color: #fff;
+            background: linear-gradient(120deg, #cce7f0, #85c1e9);
+            color: #2c3e50;
             text-align: center;
         }
 
         header {
             padding: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            border-bottom: 2px solid #2a5298;
+            background: rgba(255, 255, 255, 0.9);
+            border-bottom: 3px solid #85c1e9;
+            text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
         }
 
         header h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin: 0;
+            color: #2980b9;
         }
 
         nav {
             margin-top: 10px;
         }
 
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 10px;
+        nav button {
+            padding: 10px 20px;
+            font-size: 1rem;
             font-weight: bold;
+            color: #fff;
+            background: #2980b9;
+            border: none;
+            border-radius: 30px;
+            margin: 0 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out, transform 0.2s;
         }
 
-        nav a:hover {
-            text-decoration: underline;
+        nav button:hover {
+            background-color: #5dade2;
+            transform: scale(1.1);
         }
 
         main {
@@ -53,64 +58,73 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 70vh;
+            min-height: 75vh;
             padding: 20px;
         }
 
         #timer-section {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         #timer-display {
-            font-size: 5rem;
-            font-family: 'Courier New', monospace;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
+            font-size: 6rem;
+            font-family: 'Roboto Mono', monospace;
+            margin-bottom: 30px;
+            letter-spacing: 4px;
+            color: #2980b9;
         }
 
-        #start-stop-button {
-            padding: 15px 30px;
-            font-size: 1.2rem;
+        #toggle-button {
+            padding: 15px 40px;
+            font-size: 1.5rem;
             font-weight: bold;
-            color: #2a5298;
-            background: #fff;
+            color: #fff;
+            background: #1abc9c;
             border: none;
-            border-radius: 8px;
+            border-radius: 30px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease-in-out, transform 0.2s;
         }
 
-        #start-stop-button:hover {
-            background-color: #f0f0f0;
+        #toggle-button:hover {
+            background-color: #48c9b0;
+            transform: scale(1.1);
+        }
+
+        #prompt-section {
+            display: none;
+            margin-top: 20px;
         }
 
         footer {
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.7);
-            font-size: 0.9rem;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-top: 3px solid #85c1e9;
+            font-size: 1rem;
         }
 
         footer p {
             margin: 0;
+            color: #2980b9;
         }
     </style>
 </head>
+
 <body>
     <header>
         <h1>TryHard</h1>
         <nav>
-            <a href="/">Home</a>
-            <a href="/lb/">Leaderboard</a>
+            <button onclick="location.href='/'">Home</button>
+            <button onclick="location.href='/lb/'">Leaderboard</button>
             {% if username %}
-                <span>Welcome, {{ username }}!</span>
-                <a href="/login/">Logout</a>
+                <span style="font-weight: bold; color: #2980b9;">Welcome, {{ username }}!</span>
+                <button onclick="location.href='/login/'">Logout</button>
             {% else %}
-                not found!
-                <a href="/login/">Login</a>
-                <a href="/signup/">Sign Up</a>
+                <button onclick="location.href='/login/'">Login</button>
+                <button onclick="location.href='/signup/'">Sign Up</button>
             {% endif %}
         </nav>
     </header>
@@ -119,7 +133,7 @@
             <h2 id="timer-display">00:00:00</h2>
             <button id="toggle-button">Start Studying</button>
         </section>
-        <section id="prompt-section" style="display: none;">
+        <section id="prompt-section">
             <h3>Are you still there?</h3>
             <button id="confirm-button">Yes</button>
         </section>
@@ -127,7 +141,7 @@
     <footer>
         <p>TryHard Team: Mamadu, Ramin, Aamir, Zinedine.</p>
     </footer>
+    <script src="{% static '/js/timer.js' %}"></script>
 </body>
-        <script src="{% static '/js/timer.js' %}"></script>
 
 </html>
