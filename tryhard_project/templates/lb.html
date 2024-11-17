@@ -2,69 +2,206 @@
 {% load custom_filters %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Leaderboard</title>
-    <!-- link to Custom CSS -->
+    <!-- Link to Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/leaderboard.css' %}">
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #d0eaff, #88c9f2);
+            color: #2c3e50;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header Styling */
+        header {
+            background: #004d99;
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo a {
+            text-decoration: none;
+            font-size: 1.8rem;
+            color: white;
+            font-weight: bold;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .logo a:hover {
+            transform: rotate(-5deg);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .nav-links li a:hover {
+            background: #3385ff;
+            transform: scale(1.1);
+        }
+
+        /* Main Section Styling */
+        main {
+            flex: 1;
+            max-width: 900px;
+            margin: 40px auto;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #004d99;
+        }
+
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .leaderboard-table th,
+        .leaderboard-table td {
+            text-align: center;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .leaderboard-table th {
+            background: #004d99;
+            color: white;
+        }
+
+        .leaderboard-table tbody tr {
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .leaderboard-table tbody tr:hover {
+            background: #eaf6ff;
+            transform: scale(1.02);
+        }
+
+        .rank {
+            font-size: 1.2rem;
+        }
+
+        /* Footer Styling */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #004d99;
+            color: white;
+            margin-top: auto;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
+
 <body>
-    <!-- nav bar -->
+    <!-- Nav Bar -->
     <header>
         <div class="nav-container">
-            <h1 class="logo"><a href="/">TryHard</a></h1>
+            <h1 class="logo">  
+                <button class="btn" style="background: #3399ff; border: none; border-radius: 50px; padding: 10px 25px; cursor: pointer;">
+                    <a href="/" style="text-decoration: none; color: white; font-weight: bold;">TryHard</a>
+                </button>
+        </h1>
             <nav>
                 <ul class="nav-links">
                     <li><a href="/timer/">Timer</a></li>
                     <li><a href="/lb/">Leaderboard</a></li>
                     {% if request.session.username %}
-                        <li><span>Welcome, {{ request.session.username }}!</span></li>
-                        <li><a href="/login/">Logout</a></li>
+                    <li><span>Welcome, {{ request.session.username }}!</span></li>
+                    <li><a href="/login/">Logout</a></li>
                     {% else %}
-                        <li><a href="/login/">Login</a></li>
-                        <li><a href="/signup/">Sign Up</a></li>
+                    <li><a href="/login/">Login</a></li>
+                    <li><a href="/signup/">Sign Up</a></li>
                     {% endif %}
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- leaderboard content -->
+    <!-- Leaderboard Content -->
     <main>
         <section class="leaderboard-section">
             <h2>Leaderboard - Top Studying Users</h2>
 
             {% if users %}
-                <table class="leaderboard-table">
-                    <thead>
-                        <tr>
-                            <th>Rank</th>
-                            <th>Username</th>
-                            <th>Total Study Time</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for person in users %}
-                        <tr>
-                            <td class="rank">
-                                {% if forloop.counter0 == 0 %}
-                                    🥇
-                                {% elif forloop.counter0 == 1 %}
-                                    🥈
-                                {% elif forloop.counter0 == 2 %}
-                                    🥉
-                                {% else %}
-                                    {{ forloop.counter }}
-                                {% endif %}
-                            </td>
-                            <td>{{ person.username }}</td>
-                            <td>{{ person.total_time|time_format }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+            <table class="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Username</th>
+                        <th>Total Study Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for person in users %}
+                    <tr>
+                        <td class="rank">
+                            {% if forloop.counter0 == 0 %}
+                            🥇
+                            {% elif forloop.counter0 == 1 %}
+                            🥈
+                            {% elif forloop.counter0 == 2 %}
+                            🥉
+                            {% else %}
+                            {{ forloop.counter }}
+                            {% endif %}
+                        </td>
+                        <td>{{ person.username }}</td>
+                        <td>{{ person.total_time|time_format }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
             {% else %}
-                <p>No users found.</p>
+            <p>No users found.</p>
             {% endif %}
         </section>
     </main>
@@ -73,4 +210,5 @@
         <p>TryHard Team: Mamadu, Ramin, Aamir, Zinedine.</p>
     </footer>
 </body>
+
 </html>
