@@ -78,7 +78,17 @@ def save_session(request):
             # Here you would save the duration to the database, if applicable
             print(duration)
             print(username)
-            return JsonResponse({'status': 'success', 'duration': duration})
+
+            if username:
+
+                user = CustomUser.objects.get(username=username)
+
+                user.total_time += duration
+                print(user.total_time)
+                user.save()
+                return JsonResponse({'status': 'success', 'duration': duration})
+            else:
+                return "couldnt find"
         except json.JSONDecodeError:
             return JsonResponse({'status': 'error', 'message': 'Invalid JSON'}, status=400)
     else:
