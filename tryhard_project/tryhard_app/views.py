@@ -15,32 +15,39 @@ from .models import CustomUser
 def index(request):
     return render(request,'index.html')
 
-def leaderboard(request):
-    return render(request,'leaderboard.html')
-
 def login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
         next_url = request.POST.get('next', '/timer/')  # Default to '/dashboard/'
 
+
         # Fetch the user from the database
         try:
             user = CustomUser.objects.get(username=username)
+            
         except CustomUser.DoesNotExist:
             print('not found')
             return render(request, 'login.html', {'error': 'Invalid username or password'})
         
-        # Check if the password is correct using check_password
-        if check_password(password,user.password):  # Compare plain password with hashed password
+       
+        print("Password from form:", password)
+        print("Password hash from DB:", user.password)
+        print("Password check result:", check_password(password, user.password))
+        # # Check if the password is correct using check_password
+        # print("Session before login:", request.session.get('username'))
+        if check_password(password.strip(),user.password):  # Compare plain password with hashed password
             # Set session variables to indicate the user is logged in
             # request.session['user_id'] = user.id
+            print("Session after login:", request.session.get('username'))
             request.session['username'] = user.username
             return render(request, 'timer.html',{'username':request.session.get('username')})
   # Redirect to the dashboard or next URL
         else:
             
+            print('bad login')
             
+
             print(password)
             print(user.password)
 
@@ -75,17 +82,20 @@ def save_session(request):
             data = json.loads(request.body)
             username = request.session.get('username')
             duration = data.get('duration', 0)
-            # Here you would save the duration to the database, if applicable
+
             print(duration)
             print(username)
 
             if username:
 
+                print("Session in save_session:", request.session.get('username'))
                 user = CustomUser.objects.get(username=username)
 
                 user.total_time += duration
                 print(user.total_time)
+                
                 user.save()
+                
                 return JsonResponse({'status': 'success', 'duration': duration})
             else:
                 return "couldnt find"
@@ -95,5 +105,11 @@ def save_session(request):
         return JsonResponse({'status': 'error', 'message': 'Only POST method is allowed'}, status=405)
     
 
+def leaderboard(request):
+    time_list = CustomUser.objects.order_by('-total_time')
+    return render(request, 'leaderboard.html',{'users':time_list})
+
+
 def timer(request):
     return render(request,'timer.html')
+

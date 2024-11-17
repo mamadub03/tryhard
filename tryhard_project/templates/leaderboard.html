@@ -1,8 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Leaderboard</title>
+  </head>
+  <body>
+    <h1>Leaderboard - Users' Total Time</h1>
 
-leaderboard
-<footer>
-    <p>TryHard team: Mamadu, Ramin, Aamir, Zinedine.</p>
-</footer>
+    {% if users %}
+      <ol>
+        {% for person in users %}
+          <li>
+            <ul>
+              <li>Username: {{ person.username }}</li>
+              <li>Total Time: {{ person.total_time }} seconds</li>
+            </ul>
+          </li>
+        {% endfor %}
+      </ol>
+    {% else %}
+      <p>No users found.</p>
+    {% endif %}
+  </body>
 </html>
