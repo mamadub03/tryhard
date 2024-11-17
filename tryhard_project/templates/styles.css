@@ -1,0 +1,56 @@
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+header, footer {
+    
+    background-color: #f2f2f2;
+    padding: 10px 0;
+}
+
+h1 {
+    margin: 0;
+}
+
+nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+#timer-section {
+    margin-top: 50px;
+}
+
+#timer-display {
+    font-size: 72px;
+    margin-bottom: 20px;
+}
+
+button {
+    font-size: 18px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+#prompt-section {
+    margin-top: 20px;
+}
+
+#prompt-section h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+#prompt-section button {
+    font-size: 18px;
+    padding: 10px 20px;
+}
+
+#prompt-section p {
+    color: red;
+}
