@@ -25,8 +25,7 @@ print(STATIC_DIR)
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-v()=0t5!egeh!ka_qq(u#f4rn&hh6-0us=+n8vb)(ctp%bfu$%'
-
+SECRET_KEY = 'X"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
